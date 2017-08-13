@@ -1,4 +1,7 @@
 # Object-Focused-Q-Learning
+
+This code is a work in progress: Will update with more details soon
+
 Implementation of the Object Focused Q Learning algorithm as described in:
 
 https://www.cc.gatech.edu/~isbell/papers/ofql2013.pdf
