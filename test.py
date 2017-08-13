@@ -2,7 +2,7 @@
 """
 Created on Fri Aug 11 11:38:32 2017
 
-@author: laksh
+@author: Lakshmi
 """
 
 from OfQ import mdp
