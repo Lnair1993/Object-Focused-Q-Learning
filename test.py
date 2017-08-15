@@ -14,12 +14,12 @@ actlist = ["Up", "Down", "Left", "Right", "Wait"]
 grid = [[-0.04, -0.04, -0.04, -0.04],
         [-0.04, -0.04, -0.04, -0.04],
         [-0.04, -0.04, -0.04, -0.04],
+        [-0.04, -0.04, -0.04, -0.04],
         [-0.04, -0.04, -0.04, -0.04]]
-#        [-0.04, -0.04, -0.04, -0.04]]
                                    
 terminals = [(2,0),(1,0),(3,1)]
 agent_start = (1,1)
-gamma = 0.9
+gamma = 0.99
 
 #Define these based on the game
 enemies = object_class("Enemies") #Enemies class
@@ -35,6 +35,6 @@ classes = [enemies, gold]
 
 Normandy_mdp = mdp(grid, terminals, actlist, objects, agent_start, gamma)
 
-o_learner = OfQ_Learning(Normandy_mdp, classes, 50, 10)
+o_learner = OfQ_Learning(Normandy_mdp, classes, 500, 1000)
 o_learner.OFQrun()
 
