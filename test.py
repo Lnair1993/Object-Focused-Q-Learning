@@ -9,6 +9,7 @@ from OfQ import mdp
 from OfQ import _object
 from OfQ import OfQ_Learning
 from OfQ import object_class
+from OfQ_RT import OfQ_RT_Learning
 
 actlist = ["Up", "Down", "Left", "Right", "Wait"]
 grid = [[-0.04, -0.04, -0.04, -0.04],
@@ -35,6 +36,8 @@ classes = [enemies, gold]
 
 Normandy_mdp = mdp(grid, terminals, actlist, objects, agent_start, gamma)
 
-o_learner = OfQ_Learning(Normandy_mdp, classes, 500, 1000)
-o_learner.OFQrun()
+#o_learner = OfQ_Learning(Normandy_mdp, classes, 300, 100)
+#o_learner.OFQrun()
 
+o_learner = OfQ_RT_Learning(Normandy_mdp, classes, 300, 100)
+o_learner.OFQ_RTrun()
