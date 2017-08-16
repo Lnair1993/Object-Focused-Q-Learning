@@ -10,6 +10,7 @@ Created on Tue Aug 15 16:47:26 2017
 from OfQ import mdp
 from OfQ import _object
 from OfQ import object_class
+import csv
 
 actlist = ["Up", "Down", "Left", "Right", "Wait"]
                                    
@@ -28,6 +29,11 @@ o3 = _object("Gold1", gold, (4,1), 100)
 #Create object array
 objects = [o1, o2, o3]
 classes = [enemies, gold]
+
+obj_dict = {}
+
+for c in classes:
+    obj_dict.update({c.class_ID:{}})
 
 #Human demonstration in Normandy
 
@@ -51,9 +57,9 @@ def update_grid(grid, mdp):
                     ['  ','  ','  ','  ']]
     grid_display.reverse()
     for obj in objects:
-        if obj._class == enemies:
+        if obj._class.class_ID == "Enemies":
             grid_display[obj.state1[0]][obj.state1[1]] = bullet
-        elif obj._id == "Gold1":
+        elif obj._class.class_ID == "Gold":
             grid_display[obj.state1[0]][obj.state1[1]] = gold
             
     agent_state = mdp.agent_state
@@ -85,9 +91,19 @@ while True:
     #The format is a tuple: ([Oa, O1, O2...], a)
     #Oa is the agent state O1, O2 etc are object states and a is the suggested action
     
+    for o in objects:
+        obj_dict[o._class.class_ID].update({(Normandy_mdp.agent_state, o.state1):user_input})
         
     Normandy_mdp.TakeAction(user_input)
+   
+with open('Obj_aff.csv', 'wb') as f:
+    writer = csv.writer(f)
+    for row in obj_dict.iteritems():
+        writer.writerow(row)
 
+#NOTES:
+    #What about states unobserved in human demo: random action?
+    #What about repeating states with different actions - maintain all and take max?
     
     
         
