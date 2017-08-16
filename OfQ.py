@@ -191,15 +191,19 @@ class OfQ_Learning:
                         mdp = self.mdp_init #initialize mdp to the initial mdp states - restart episode
                         Oa_init, O_init = mdp.get_init()
                         s = [Oa_init] + O_init
+                        
                         while s[0] not in mdp.terminals:
                             A = GetSafeActions(s, Q_r_control, i)
-                            best_value, a = EpsilonGreedy(A, Q_control, s, epsilon)
+                            a = EpsilonGreedy(A, Q_control, s, epsilon)
                             mdp.TakeAction(a)
                             
                             Oa, O, r1 = mdp.update_percept() #Update state, return agent state and obj_class array
                             
-                            if Oa in mdp.terminals:
+                            if Oa in mdp.terminals: #End if terminal state
                                 break
+                            
+                            o_states = [o.state1 for o in O]
+                            s = [Oa] + o_states #Update s
                             
                             for o in O:  #Declare O as array of object classes and o is one object class from the array
                                 if c == o._class: #previously was c = o._class
@@ -262,9 +266,9 @@ class OfQ_Learning:
         
         rand_num = random.uniform(0,1)
         if (rand_num > epsilon):
-            return best_value, action
+            return action
         else:
-            return best_value, random.choice(temp_A) #Not removing the action   #CHECK HERE
+            return random.choice(temp_A) #Not removing the action   #CHECK HERE
     
     def UpdateThresholds(self, stats,  candidates):
         i = np.argmax(stats)
