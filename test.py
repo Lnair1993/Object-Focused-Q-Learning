@@ -36,8 +36,5 @@ classes = [enemies, gold]
 
 Normandy_mdp = mdp(grid, terminals, actlist, objects, agent_start, gamma)
 
-#o_learner = OfQ_Learning(Normandy_mdp, classes, 300, 100)
-#o_learner.OFQrun()
-
-o_learner = OfQ_RT_Learning(Normandy_mdp, classes, 300, 100)
-o_learner.OFQ_RTrun()
+o_learner = OfQ_Learning(Normandy_mdp, classes, 300, 100)
+o_learner.OFQrun()
