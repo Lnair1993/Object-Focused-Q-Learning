@@ -35,7 +35,7 @@ obj_dict = {}
 for c in classes:
     obj_dict.update({c.class_ID:{}})
 
-#Human demonstration in Normandy
+#Human demonstration in Normandy game domain
 
 bullet = '->'
 agent = 'A '
@@ -87,10 +87,6 @@ while True:
     if user_input == 'x':
         break
     
-    #Record the current state and user suggested action
-    #The format is a tuple: ([Oa, O1, O2...], a)
-    #Oa is the agent state O1, O2 etc are object states and a is the suggested action
-    
     for o in objects:
         obj_dict[o._class.class_ID].update({(Normandy_mdp.agent_state, o.state1):user_input})
         
@@ -100,10 +96,6 @@ with open('Obj_aff.csv', 'wb') as f:
     writer = csv.writer(f)
     for row in obj_dict.iteritems():
         writer.writerow(row)
-
-#NOTES:
-    #What about states unobserved in human demo: random action?
-    #What about repeating states with different actions - maintain all and take max?
     
     
         
