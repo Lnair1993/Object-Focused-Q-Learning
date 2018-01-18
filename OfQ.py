@@ -11,11 +11,6 @@ import operator
 import random
 from matplotlib import pyplot as plt
 
-#Reward associated with objects?
-#Terminal state associated with objects
-
-#init is the initial state of agent and objects
-
 class mdp:
     def __init__(self, grid, terminals, actlist, objects, agent_start, gamma = 0.9, game = 'Normandy'):
         self.grid = grid
@@ -57,8 +52,6 @@ class mdp:
                 new_state = objects_init[i]
                 obj.update_object_state(new_state)
                 #obj.state1 = objects_init[i]
-                
-            #By some probability its on the negative side of the axis - not in the world    
                 
             #new_terminals.append(obj.state1)   #Update each object class here with new states
             new_terminals.append(new_state)
@@ -113,11 +106,9 @@ class _object:
         self.state0 = None   #Old state
         self.reward = reward
         
-    def update_object_state(self, state): #probably don't need this
+    def update_object_state(self, state): 
         self.state0 = self.state1
         self.state1 = state
-        
-#ABOVE THIS LINE VERIFIED
         
 class object_class:
     #Defining an object class
@@ -147,7 +138,7 @@ class OfQ_Learning:
         if (alpha):
             self.alpha = alpha
         else:
-            self.alpha = 0.25 #lambda n: 1./(1+n)    #CHECK HERE
+            self.alpha = 0.25  
             
         #if state in self.terminals:
         #    return [None]
@@ -206,7 +197,7 @@ class OfQ_Learning:
                             s = [Oa] + o_states #Update s
                             
                             for o in O:  #Declare O as array of object classes and o is one object class from the array
-                                if c == o._class: #previously was c = o._class
+                                if c == o._class:
                                     cls_idx = self.C.index(c)
                                 
                                     #alpha = 1/(1+j)
